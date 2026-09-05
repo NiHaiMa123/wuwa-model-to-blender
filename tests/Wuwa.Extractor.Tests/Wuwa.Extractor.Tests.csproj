@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/Wuwa.Core/Wuwa.Core.csproj" />
+    <ProjectReference Include="../../src/Wuwa.Extractor/Wuwa.Extractor.csproj" />
+  </ItemGroup>
+</Project>

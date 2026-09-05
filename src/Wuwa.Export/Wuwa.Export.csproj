@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../Wuwa.Core/Wuwa.Core.csproj" />
+    <ProjectReference Include="../Wuwa.Extractor/Wuwa.Extractor.csproj" />
+  </ItemGroup>
+</Project>

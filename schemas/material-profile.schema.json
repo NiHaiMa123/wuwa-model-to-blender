@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/wuwa/material-profile.schema.json",
+  "title": "WuWa material profile",
+  "type": "object",
+  "required": ["profileId", "gameVersionRange", "rules"],
+  "properties": {
+    "profileId": { "type": "string" },
+    "gameVersionRange": { "type": "string" },
+    "rules": { "type": "array" }
+  }
+}

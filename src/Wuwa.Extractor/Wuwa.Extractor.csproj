@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../Wuwa.Core/Wuwa.Core.csproj" />
+    <!-- Pin the exact CUE4Parse version after P0/P1 compatibility validation. -->
+  </ItemGroup>
+</Project>

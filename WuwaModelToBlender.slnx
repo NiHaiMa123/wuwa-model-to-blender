@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="src/Wuwa.Core/Wuwa.Core.csproj" />
+  <Project Path="src/Wuwa.Extractor/Wuwa.Extractor.csproj" />
+  <Project Path="src/Wuwa.Export/Wuwa.Export.csproj" />
+  <Project Path="src/Wuwa.Cli/Wuwa.Cli.csproj" />
+  <Project Path="tests/Wuwa.Extractor.Tests/Wuwa.Extractor.Tests.csproj" />
+</Solution>

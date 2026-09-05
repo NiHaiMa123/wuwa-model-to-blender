@@ -1,0 +1,39 @@
+# Build
+bin/
+obj/
+.vs/
+.idea/
+.vscode/
+*.user
+
+# Python / Blender
+__pycache__/
+*.py[cod]
+*.blend1
+*.blend2
+
+# Local game data / extracted assets / secrets
+work/**
+!work/.gitkeep
+*.pak
+*.ucas
+*.utoc
+*.uasset
+*.uexp
+*.ubulk
+*.wem
+*.bnk
+*.wem
+*.uemodel
+*.ueanim
+*.dds
+*.png
+*.tga
+*.exr
+*.json.secret
+*aes*.json
+*mappings*.usmap
+
+# OS
+.DS_Store
+Thumbs.db

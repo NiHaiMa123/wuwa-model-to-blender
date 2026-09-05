@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Wuwa.Core/Wuwa.Core.csproj" />
+    <ProjectReference Include="../Wuwa.Extractor/Wuwa.Extractor.csproj" />
+    <ProjectReference Include="../Wuwa.Export/Wuwa.Export.csproj" />
+  </ItemGroup>
+</Project>

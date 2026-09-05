@@ -1,0 +1,34 @@
+{
+  "game": {
+    "installDir": "",
+    "paksDir": "",
+    "version": "3.6.x",
+    "ueVersion": "GAME_UE4_26",
+    "platform": "Windows",
+    "region": "overseas"
+  },
+  "decryption": {
+    "aes": {
+      "mode": "local-file",
+      "file": "",
+      "endpoint": "",
+      "jsonPath": "$.['mainKey','dynamicKeys']",
+      "cacheFile": "work/cache/aes.json"
+    },
+    "mappings": {
+      "mode": "local-file",
+      "file": "",
+      "endpoint": "",
+      "cacheFile": "work/cache/mappings.usmap"
+    }
+  },
+  "blender": {
+    "executable": "",
+    "targetVersion": "4.5",
+    "ueFormatAddonRequired": true
+  },
+  "output": {
+    "root": "work/exports",
+    "preserveUnrealPaths": true
+  }
+}

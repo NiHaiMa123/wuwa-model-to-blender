@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/wuwa/export-manifest.schema.json",
+  "title": "WuWa export manifest",
+  "type": "object",
+  "required": ["schemaVersion", "jobId", "gameVersion", "sourceObjectPath", "toolVersions", "files", "warnings"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "jobId": { "type": "string" },
+    "gameVersion": { "type": "string" },
+    "sourceObjectPath": { "type": "string" },
+    "toolVersions": { "type": "object", "additionalProperties": { "type": "string" } },
+    "files": { "type": "array", "items": { "type": "string" } },
+    "warnings": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}
