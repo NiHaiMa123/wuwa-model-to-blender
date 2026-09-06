@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "1",
+  "jobId": "ueformat-smoke",
+  "timestamp": "2026-09-06T00:00:00+00:00",
+  "gameVersion": "fixture",
+  "ueVersion": "GAME_WutheringWaves",
+  "sourceObjectPath": "/Game/WuwaSmoke/SmokeCube.SmokeCube",
+  "unrealObjectPath": "/Game/WuwaSmoke/SmokeCube.SmokeCube",
+  "toolVersions": {
+    "wuwa2blender": "0.1.0-p7",
+    "ueformat": "synthetic-v10"
+  },
+  "mesh": {
+    "objectPath": "/Game/WuwaSmoke/SmokeCube.SmokeCube",
+    "exportType": "SkeletalMesh",
+    "ueModel": "SmokeCube.uemodel",
+    "lodCount": 1,
+    "lods": [
+      {
+        "index": 0,
+        "vertices": 4,
+        "triangles": 2,
+        "indices": 6,
+        "sections": 2,
+        "uvChannels": 1
+      }
+    ],
+    "materialSlotCount": 2,
+    "morphTargetCount": 1,
+    "hasVertexColors": true,
+    "uvChannels": 1
+  },
+  "skeleton": {
+    "objectPath": "/Game/WuwaSmoke/SmokeCube_Skeleton",
+    "boneCount": 2,
+    "socketCount": 0,
+    "rootBone": "Root",
+    "bones": [
+      "Root",
+      "Spine"
+    ]
+  },
+  "materials": [
+    {
+      "slotIndex": 0,
+      "slotName": "Hair",
+      "objectPath": "/Game/WuwaSmoke/MI_SmokeHair",
+      "parent": null,
+      "jsonFile": null
+    },
+    {
+      "slotIndex": 1,
+      "slotName": "Body",
+      "objectPath": "/Game/WuwaSmoke/MI_SmokeBody",
+      "parent": null,
+      "jsonFile": null
+    }
+  ],
+  "textures": [
+    {
+      "objectPath": "/Game/WuwaSmoke/T_SmokeDiffuse",
+      "parameterName": "MainTex",
+      "file": "T_SmokeDiffuse.png",
+      "width": 1,
+      "height": 1,
+      "pixelFormat": "PF_B8G8R8A8"
+    },
+    {
+      "objectPath": "/Game/WuwaSmoke/T_SmokeNormal",
+      "parameterName": "PM_Normals",
+      "file": "T_SmokeNormal.png",
+      "width": 1,
+      "height": 1,
+      "pixelFormat": "PF_B8G8R8A8"
+    }
+  ],
+  "animations": [],
+  "materialParameters": [
+    {
+      "materialObjectPath": "/Game/WuwaSmoke/MI_SmokeHair",
+      "slotName": "Hair",
+      "textures": {
+        "MainTex": "/Game/WuwaSmoke/T_SmokeDiffuse"
+      },
+      "scalars": {},
+      "vectors": {}
+    },
+    {
+      "materialObjectPath": "/Game/WuwaSmoke/MI_SmokeBody",
+      "slotName": "Body",
+      "textures": {
+        "PM_Diffuse": "/Game/WuwaSmoke/T_SmokeDiffuse",
+        "PM_Normals": "/Game/WuwaSmoke/T_SmokeNormal"
+      },
+      "scalars": {},
+      "vectors": {}
+    }
+  ],
+  "files": [
+    "SmokeCube.uemodel",
+    "T_SmokeDiffuse.png",
+    "T_SmokeNormal.png"
+  ],
+  "sourceHashes": {
+    "aesSource": "fixture",
+    "aesContentHash": "synthetic",
+    "mappingsSource": "none",
+    "mappingsContentHash": null,
+    "files": {}
+  },
+  "warnings": [
+    "Self-authored P6 smoke fixture; not a game asset."
+  ]
+}

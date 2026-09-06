@@ -1,0 +1,72 @@
+{
+  "profileId": "wuwa-3x",
+  "gameVersionRange": ">=3.0",
+  "status": "p4-pbr-baseline",
+  "import": {
+    "scaleFactor": 0.01,
+    "targetLod": 0,
+    "importMorphTargets": true,
+    "importSockets": true,
+    "reorientBones": false,
+    "boneLength": 4.0
+  },
+  "textureRoles": {
+    "baseColor": ["MainTex", "PM_Diffuse", "D", "BaseColor", "Diffuse"],
+    "normal": ["PM_Normals", "Normal_Roughness_Metallic", "NormalMap", "Normal"],
+    "mask": ["MaskTex", "TypeMask", "HM", "ID"],
+    "emission": ["EM", "PM_Emissive", "Emissive", "HeightLightMap"],
+    "cube": ["PBRCubeMap"]
+  },
+  "normalYFlip": true,
+  "slotKinds": [
+    {
+      "kind": "outline",
+      "match": ["_OL", "OL_", "_HET", "HETA", "FS_"],
+      "alpha": "OPAQUE",
+      "useBaseColorAlpha": false,
+      "skip": true
+    },
+    {
+      "kind": "hair",
+      "match": ["Hair", "Bangs"],
+      "alpha": "HASHED",
+      "useBaseColorAlpha": true,
+      "skip": false
+    },
+    {
+      "kind": "face",
+      "match": ["Face"],
+      "alpha": "OPAQUE",
+      "useBaseColorAlpha": false,
+      "skip": false
+    },
+    {
+      "kind": "eye",
+      "match": ["Eye"],
+      "alpha": "OPAQUE",
+      "useBaseColorAlpha": false,
+      "skip": false
+    },
+    {
+      "kind": "star",
+      "match": ["Star", "Xing"],
+      "alpha": "BLEND",
+      "useBaseColorAlpha": true,
+      "skip": false
+    },
+    {
+      "kind": "body",
+      "match": ["Down", "Skirt", "Body", "Cloth"],
+      "alpha": "OPAQUE",
+      "useBaseColorAlpha": false,
+      "skip": false
+    }
+  ],
+  "defaultSlotKind": {
+    "kind": "body",
+    "match": [],
+    "alpha": "OPAQUE",
+    "useBaseColorAlpha": false,
+    "skip": false
+  }
+}

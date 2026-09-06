@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/wuwa/run-job.schema.json",
+  "title": "WuWa one-command run job",
+  "type": "object",
+  "required": ["schemaVersion", "jobId", "toolVersion", "assetInput", "stages", "overallStatus"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "toolVersion": { "type": "string" },
+    "jobId": { "type": "string" },
+    "timestamp": { "type": "string" },
+    "configPath": { "type": "string" },
+    "assetInput": { "type": "string" },
+    "resolvedAsset": { "type": "string" },
+    "savePath": { "type": "string" },
+    "exportDirectory": { "type": "string" },
+    "manifestPath": { "type": "string" },
+    "blendPath": { "type": "string" },
+    "reportPath": { "type": "string" },
+    "jobPath": { "type": "string" },
+    "logPath": { "type": "string" },
+    "profilePath": { "type": "string" },
+    "fingerprints": {
+      "type": "object",
+      "properties": {
+        "config": { "type": "string" },
+        "source": { "type": "string" },
+        "profile": { "type": "string" },
+        "combined": { "type": "string" }
+      }
+    },
+    "overallStatus": { "type": "string", "enum": ["pass", "warn", "fail"] },
+    "reusedExport": { "type": "boolean" },
+    "reusedBlend": { "type": "boolean" },
+    "stages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "status": { "type": "string", "enum": ["pending", "running", "pass", "warn", "fail", "skipped"] },
+          "started": { "type": ["string", "null"] },
+          "finished": { "type": ["string", "null"] },
+          "summary": { "type": "string" },
+          "details": { "type": "object", "additionalProperties": { "type": "string" } }
+        }
+      }
+    },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "errors": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

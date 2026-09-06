@@ -1,0 +1,7 @@
+{
+  "comment": "Explicit search expansions only. Not a character-name recognizer. Keys are matched case-insensitively.",
+  "aliases": {
+    "jinhsi": ["jinxi"],
+    "今汐": ["jinxi", "R2T1JinxiMd10011"]
+  }
+}

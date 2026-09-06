@@ -8,10 +8,20 @@
     "schemaVersion": { "type": "string" },
     "jobId": { "type": "string" },
     "gameVersion": { "type": "string" },
+    "ueVersion": { "type": "string" },
     "sourceObjectPath": { "type": "string" },
+    "unrealObjectPath": { "type": "string" },
     "toolVersions": { "type": "object", "additionalProperties": { "type": "string" } },
+    "mesh": { "type": "object" },
+    "skeleton": { "type": "object" },
+    "materials": { "type": "array" },
+    "textures": { "type": "array" },
+    "animations": { "type": "array" },
+    "materialParameters": { "type": "array" },
     "files": { "type": "array", "items": { "type": "string" } },
-    "warnings": { "type": "array", "items": { "type": "string" } }
+    "sourceHashes": { "type": "object" },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "golden": { "type": "object" }
   },
   "additionalProperties": true
 }

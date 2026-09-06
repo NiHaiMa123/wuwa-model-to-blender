@@ -9,6 +9,6 @@ public static class ManifestWriter
     {
         Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(path))!);
         await using var stream = File.Create(path);
-        await JsonSerializer.SerializeAsync(stream, manifest, new JsonSerializerOptions { WriteIndented = true }, cancellationToken);
+        await JsonSerializer.SerializeAsync(stream, manifest, ConfigLoader.JsonOptions, cancellationToken);
     }
 }

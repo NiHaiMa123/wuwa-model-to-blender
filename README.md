@@ -32,7 +32,7 @@ Blender 4.5+
 character.blend
 ```
 
-> 当前仓库是 **v0 设计与工程骨架**。`PLAN.md` 定义了实现顺序与验收标准，尚未宣称已经能够一键解包当前游戏版本。
+> 当前进度到 **P7**：`doctor` / `search` / `export` / `blender` / `run` 已实现；单元测试、本地集成开关、可提交的 UEFormat smoke fixture、Windows CLI zip、Blender add-on zip 与不接触游戏资源的 GitHub Actions 已就绪。
 
 ## 为什么采用这条路线
 
@@ -81,18 +81,18 @@ UEFormat 已经覆盖 Skeletal Mesh 所需的核心数据，例如：
 
 ## 计划中的 CLI
 
-最终希望形成下面的使用方式：
+P1 `doctor`、P2 `search`、P3 `export`、P4 `blender` 与 P5 `run` 已实现：
 
 ```powershell
-# 环境检查
-wuwa2blender doctor
+# 环境检查（P1）
+wuwa2blender doctor --config config/wuwa.local.json --result work/doctor/result.json
 
-# 在资源索引中搜索
-wuwa2blender search "Jinhsi"
+# 在资源索引中搜索（P2）
+wuwa2blender search "Jinhsi" --type SkeletalMesh
 
-# 只导出中间资产
+# 依赖解析 + UEFormat staging + manifest.json（P3）
 wuwa2blender export `
-  --asset "/Game/.../Character/..." `
+  --asset "Client/Content/Aki/Character/Role/FemaleM/Jinxi/R2T1JinxiMd10011/Model/R2T1JinxiMd10011.R2T1JinxiMd10011" `
   --out "work/exports/Jinhsi"
 
 # 把已经导出的 manifest 交给 Blender
@@ -100,13 +100,53 @@ wuwa2blender blender `
   --manifest "work/exports/Jinhsi/manifest.json" `
   --save "work/blend/Jinhsi.blend"
 
-# 最终目标：一条命令
+# 一键：doctor → index → export → blender（P5）
 wuwa2blender run `
-  --asset "/Game/.../Character/..." `
+  --asset "Client/Content/Aki/Character/Role/FemaleM/Jinxi/R2T1JinxiMd10011/Model/R2T1JinxiMd10011.R2T1JinxiMd10011" `
   --save "work/blend/Jinhsi.blend"
 ```
 
-CLI 目前只是目标接口，详见 `PLAN.md`。
+`export` 只解析目标 SkeletalMesh 及其 Skeleton / Material / Texture / Morph 依赖，写出 `.uemodel`、贴图、材质 JSON 和 `manifest.json`。默认不整包解压，也不导出动画。
+
+`blender` 读取这份 manifest，用已安装的 UEFormat add-on 做 headless 导入，按 `config/material-profiles/3x.json` 生成基线 PBR 材质，校验后保存 `.blend` 与 `*.validation.json`。
+
+`run` 按 `ResolveConfig → Doctor → Index → ResolveDependencies → Export → ValidateExport → LaunchBlender → ValidateBlend → SaveResult` 编排。每个 stage 写入 `work/runs/<job>/job.json`（带 job-id 日志）。输入未变时可跳过 export/blender；失败保留 staging，不自动删除。`--force` 全量重跑，`--from-stage LaunchBlender` 从指定 stage 续跑。`--asset` 可以是 object path，也可以是 `Jinhsi` / `今汐` 这类 search 别名。
+
+## 测试
+
+默认 `dotnet test` **不挂载游戏归档**，也不启动 Blender。
+
+```powershell
+# 单元测试 + 自建 fixture 校验（CI 安全）
+dotnet test
+
+# Python：manifest 解析 / material profile / JSON schema（不依赖 bpy）
+python tests/python/test_manifest_io.py
+python tests/python/test_schemas.py
+
+# 本地集成：真实游戏安装 + Jinhsi golden invariants
+$env:WUWA_INTEGRATION_TESTS = "1"
+dotnet test --filter GoldenIntegrationTests
+
+# Headless Blender smoke：导入 tests/fixtures/ueformat-smoke/（自建几何，非游戏资源）
+$env:WUWA_BLENDER_SMOKE = "1"
+dotnet test --filter HeadlessImport_SelfAuthoredUeFormatFixture
+```
+
+`tools/smoke-test.ps1` 会跑单元测试、Python tests，并在配置了 Blender 时跑 smoke。CI 只跑无游戏归档、无 Blender 的检查，并打包 zip；不得上传 `work/` 或任何游戏资产。
+
+## 打包（P7）
+
+```powershell
+# Windows 自包含 CLI + add-on
+.\tools\pack.ps1
+# dist/wuwa2blender-win-x64.zip
+# dist/wuwa_model_tools.zip
+```
+
+解压 CLI zip 后，在该目录复制 `config/wuwa.example.json` → `config/wuwa.local.json`，填入本机游戏目录与 Blender 路径，再运行 `wuwa2blender.exe doctor`。`blender` / `run` 需要 zip 内的 `blender/scripts/batch_import.py` 与 `config/material-profiles/3x.json`；headless 导入仍要求本机已安装 UEFormat add-on。
+
+Blender GUI：Edit → Preferences → Add-ons → Install from Disk → `wuwa_model_tools.zip`。add-on zip 内带有默认 `profiles/3x.json`，不包含游戏资源。
 
 ## 项目结构
 
@@ -123,6 +163,7 @@ wuwa-model-to-blender/
 ├── config/
 │   ├── wuwa.example.json
 │   └── material-profiles/
+│       ├── 3x.json
 │       ├── legacy.example.json
 │       └── 3x.example.json
 │
@@ -136,7 +177,9 @@ wuwa-model-to-blender/
 │   ├── addon/wuwa_model_tools/
 │   │   ├── __init__.py
 │   │   ├── importer.py
+│   │   ├── manifest_io.py
 │   │   ├── materials.py
+│   │   ├── pipeline.py
 │   │   ├── rigging.py
 │   │   ├── validation.py
 │   │   ├── operators.py
@@ -146,15 +189,21 @@ wuwa-model-to-blender/
 │
 ├── schemas/
 │   ├── export-manifest.schema.json
-│   └── material-profile.schema.json
+│   ├── material-profile.schema.json
+│   └── run-job.schema.json
 │
 ├── tests/
 │   ├── Wuwa.Extractor.Tests/
+│   ├── python/
 │   └── fixtures/
+│       └── ueformat-smoke/   # 自建 UEFormat，可提交
+│
+├── .github/workflows/ci.yml
 │
 ├── tools/
 │   ├── bootstrap.ps1
 │   ├── build.ps1
+│   ├── pack.ps1
 │   └── smoke-test.ps1
 │
 ├── docs/

@@ -3,20 +3,20 @@
     "installDir": "",
     "paksDir": "",
     "version": "3.6.x",
-    "ueVersion": "GAME_UE4_26",
+    "ueVersion": "GAME_WutheringWaves",
     "platform": "Windows",
     "region": "overseas"
   },
   "decryption": {
     "aes": {
-      "mode": "local-file",
+      "mode": "endpoint",
       "file": "",
-      "endpoint": "",
-      "jsonPath": "$.['mainKey','dynamicKeys']",
+      "endpoint": "https://yarik0chka.github.io/wuwa-keys/keys.json",
+      "jsonPath": "$['mainKey','dynamicKeys']",
       "cacheFile": "work/cache/aes.json"
     },
     "mappings": {
-      "mode": "local-file",
+      "mode": "none",
       "file": "",
       "endpoint": "",
       "cacheFile": "work/cache/mappings.usmap"

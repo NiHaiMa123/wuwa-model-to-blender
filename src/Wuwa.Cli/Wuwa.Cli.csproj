@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
+    <AssemblyName>wuwa2blender</AssemblyName>
+    <RootNamespace>Wuwa.Cli</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../Wuwa.Core/Wuwa.Core.csproj" />

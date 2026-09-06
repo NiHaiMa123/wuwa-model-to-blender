@@ -5,12 +5,17 @@ obj/
 .idea/
 .vscode/
 *.user
+dist/
 
 # Python / Blender
 __pycache__/
 *.py[cod]
+*.blend
 *.blend1
 *.blend2
+
+# Local machine config (paths, provider endpoints)
+config/wuwa.local.json
 
 # Local game data / extracted assets / secrets
 work/**
@@ -33,6 +38,12 @@ work/**
 *.json.secret
 *aes*.json
 *mappings*.usmap
+
+# P6 self-authored smoke fixture (not game assets)
+!tests/fixtures/ueformat-smoke/
+!tests/fixtures/ueformat-smoke/**
+!tests/fixtures/ueformat-smoke/**/*.uemodel
+!tests/fixtures/ueformat-smoke/**/*.png
 
 # OS
 .DS_Store

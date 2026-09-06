@@ -5,6 +5,7 @@
 | Project | Intended role | Initial integration strategy |
 |---|---|---|
 | CUE4Parse | UE archive/package parsing | NuGet / external dependency in C# extractor |
+| CUE4Parse-Conversion | UEFormat / texture / material export adapter | NuGet `1.2.2.202609`, same Apache-2.0 CUE4Parse repo; thin wrapper in `Wuwa.Export` |
 | FModel | Manual inspection and golden-path debugging | External GUI tool; no UI automation in production |
 | UEFormat | Model/animation exchange + Blender importer | External exporter/importer dependency; record version in manifest |
 | WWMI-Tools | Frame-dump/mod reference | Reference/secondary diagnostic path only |

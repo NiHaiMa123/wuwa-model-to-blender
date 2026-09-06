@@ -3,10 +3,24 @@
   "$id": "https://example.invalid/wuwa/material-profile.schema.json",
   "title": "WuWa material profile",
   "type": "object",
-  "required": ["profileId", "gameVersionRange", "rules"],
+  "required": ["profileId", "gameVersionRange", "textureRoles", "slotKinds"],
   "properties": {
     "profileId": { "type": "string" },
     "gameVersionRange": { "type": "string" },
+    "status": { "type": "string" },
+    "import": { "type": "object" },
+    "textureRoles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+    "normalYFlip": { "type": "boolean" },
+    "slotKinds": { "type": "array" },
+    "defaultSlotKind": { "type": "object" },
     "rules": { "type": "array" }
-  }
+  },
+  "additionalProperties": true
 }
+

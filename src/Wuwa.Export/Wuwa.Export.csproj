@@ -2,5 +2,6 @@
   <ItemGroup>
     <ProjectReference Include="../Wuwa.Core/Wuwa.Core.csproj" />
     <ProjectReference Include="../Wuwa.Extractor/Wuwa.Extractor.csproj" />
+    <PackageReference Include="CUE4Parse-Conversion" Version="1.2.2.202609" />
   </ItemGroup>
 </Project>

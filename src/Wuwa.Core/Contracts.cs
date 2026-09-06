@@ -1,23 +1,27 @@
 namespace Wuwa.Core;
 
-public sealed record ExportManifest(
-    string SchemaVersion,
-    string JobId,
-    string GameVersion,
-    string UnrealObjectPath,
-    IReadOnlyList<string> Files,
-    IReadOnlyList<string> Warnings);
-
 public interface IAesKeyProvider
 {
     Task<AesKeySet> GetAsync(CancellationToken cancellationToken = default);
 }
 
-public sealed record AesKeySet(string SourceId, string ContentHash, IReadOnlyList<string> Keys);
+public sealed record AesKeyEntry(string Guid, string Key);
+
+public sealed record AesKeySet(
+    string SourceId,
+    string ContentHash,
+    string? MainKey,
+    IReadOnlyList<AesKeyEntry> DynamicKeys)
+{
+    public int KeyCount => (string.IsNullOrWhiteSpace(MainKey) ? 0 : 1) + DynamicKeys.Count;
+
+    public string RedactedSummary()
+        => $"source={SourceId}; hash={ContentHash}; main={(string.IsNullOrWhiteSpace(MainKey) ? "no" : "yes")}; dynamic={DynamicKeys.Count}";
+}
 
 public interface IMappingsProvider
 {
     Task<MappingsDescriptor> GetAsync(CancellationToken cancellationToken = default);
 }
 
-public sealed record MappingsDescriptor(string SourceId, string ContentHash, string LocalPath);
+public sealed record MappingsDescriptor(string SourceId, string ContentHash, string? LocalPath, bool Available);
